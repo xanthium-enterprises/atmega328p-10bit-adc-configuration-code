@@ -1,1 +1,1 @@
-# atmega328p-10bit-adc-configuration-code
+# AVR ATmega328p 10 bit ADC Configuration Code in Embedded C 
