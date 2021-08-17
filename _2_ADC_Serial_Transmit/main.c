@@ -95,7 +95,12 @@ int main()
 		// ATmega328p ADC Configuration Code 
 		
 		ADCSRA |= (1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0);  // Select ADC Prescalar to 128,11.0598MHz/128 = 85KHz
-		ADMUX  |= ADC_Channel_7;                         // Select the ADC channel to convert 
+		
+		//ADMUX  |= (1<<REFS0) ;                           // if CAP connected to AREF pin,Vref =internal AVcc,
+		//ADMUX  |= (1<<REFS0) | (1<<REFS1);               // if CAP connected to AREF pin,Vref =1.1V internal ,
+		
+		ADMUX  |= ADC_Channel_0;                         // No CAP connected,AREF tied to +5V
+		
 		ADCSRA |= (1<<ADEN)  | (1<<ADSC);                // Enable ADC and Start the conversion
 	
 		while( !(ADCSRA & (1<<ADIF)) );                  // Wait for conversion to finish
