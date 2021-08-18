@@ -1,8 +1,10 @@
 # AVR ATmega328p 10 bit ADC Configuration and PC serial communication tutorial
 
-The tutorial teaches the user to configure the 10 bit SAR ADC of ATmega328P in Embedded C and transmit the ADC result to Linux /Windows PC using USART and a USB to Serial Converter.
+ - The tutorial teaches the user to configure the 10 bit SAR ADC of ATmega328P in Embedded C and transmit the ADC result to Linux /Windows PC using USART and a USB to Serial Converter.
 
-**ADC6** and **ADC7** channels are only available in the 32 pin TQFP version of ATmega328P chip.
+ - **ADC6** and **ADC7** channels are only available in the 32 pin TQFP version of ATmega328P chip.
+
+ - Tutorial deals in **Single Channel** conversionas well as configuring **multiple channels** of ATmega328P ADC
 
 <img src = "https://www.xanthium.in/sites/default/files/site-images/atmega328p-adc-config-tutorial/atmega32-adc-data-acquisution-tutorial.jpg"/>
 
@@ -32,7 +34,7 @@ The tutorial teaches the user to configure the 10 bit SAR ADC of ATmega328P in E
 
 - <a href ="https://www.xanthium.in/how-to-avr-atmega328p-microcontroller-usart-uart-embedded-programming-avrgcc">ATmega328p USART serial communication tutorial</a>
 
-- <a href="https://www.xanthium.in/ft232-based-usb-to-serial-rs485-converter-industrial-scientific-applications">USB to Serial/RS485 Converter</a>
+- <a href="https://www.xanthium.in/USB-to-Serial-RS232-RS485-Converter">USB to Serial/RS485 Converter</a>
 
 - www.xanthium.in
 
