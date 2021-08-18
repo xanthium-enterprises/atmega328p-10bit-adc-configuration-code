@@ -34,7 +34,7 @@
 
 - <a href ="https://www.xanthium.in/how-to-avr-atmega328p-microcontroller-usart-uart-embedded-programming-avrgcc">ATmega328p USART serial communication tutorial</a>
 
-- <a href="https://www.xanthium.in/USB-to-Serial-RS232-RS485-Converter">USB to Serial/RS485 Converter</a>
+- <a href="https://www.xanthium.in/USB-to-Serial-RS232-RS485-Converter">USB to Serial/RS232/RS485 Converter</a>
 
 - www.xanthium.in
 
