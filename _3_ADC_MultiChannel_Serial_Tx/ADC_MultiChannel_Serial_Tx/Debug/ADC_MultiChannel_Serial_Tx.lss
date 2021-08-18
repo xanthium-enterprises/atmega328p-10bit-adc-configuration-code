@@ -1,0 +1,465 @@
+
+ADC_MultiChannel_Serial_Tx.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000312  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000002be  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000312  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000344  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000070  00000000  00000000  00000384  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000a42  00000000  00000000  000003f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000080d  00000000  00000000  00000e36  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000004f8  00000000  00000000  00001643  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000bc  00000000  00000000  00001b3c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000004a2  00000000  00000000  00001bf8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000027c  00000000  00000000  0000209a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000040  00000000  00000000  00002316  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 08 01 	call	0x210	; 0x210 <main>
+  78:	0c 94 5d 01 	jmp	0x2ba	; 0x2ba <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <read_adc_channel>:
+
+
+//Takes an ADC channel as parameter ->"channel_to_read"
+//and returns the converted 10bit value of that channel in a 16 bit Variable
+uint16_t read_adc_channel(uint8_t channel_to_read)
+{
+  80:	cf 93       	push	r28
+  82:	df 93       	push	r29
+  84:	00 d0       	rcall	.+0      	; 0x86 <read_adc_channel+0x6>
+  86:	cd b7       	in	r28, 0x3d	; 61
+  88:	de b7       	in	r29, 0x3e	; 62
+	
+	volatile uint16_t ADC_10bit_result = 0;
+  8a:	1a 82       	std	Y+2, r1	; 0x02
+  8c:	19 82       	std	Y+1, r1	; 0x01
+	
+	// ATmega328p ADC Configuration Code
+	
+	ADCSRA |= (1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0);  // Select ADC Prescalar to 128,11.0598MHz/128 = 85KHz
+  8e:	aa e7       	ldi	r26, 0x7A	; 122
+  90:	b0 e0       	ldi	r27, 0x00	; 0
+  92:	9c 91       	ld	r25, X
+  94:	97 60       	ori	r25, 0x07	; 7
+  96:	9c 93       	st	X, r25
+	
+	ADMUX   = ADMUX & 0xF0;   // Clear the lower bits MUX0-MUX3 of ADMUX,Will cause problems when channels are changed if not cleared                                               
+  98:	ec e7       	ldi	r30, 0x7C	; 124
+  9a:	f0 e0       	ldi	r31, 0x00	; 0
+  9c:	90 81       	ld	r25, Z
+  9e:	90 7f       	andi	r25, 0xF0	; 240
+  a0:	90 83       	st	Z, r25
+	
+	//ADMUX  |= (1<<REFS0) | (1<<REFS1) ; // Select Vref = 1.1V internal since AREF pin of ATmega328P is connected to capacitor
+	ADMUX  |= (1<<REFS0);                 // Select Vref = AVcc= 5V internal since AREF pin of ATmega328P is connected to capacitor
+  a2:	90 81       	ld	r25, Z
+  a4:	90 64       	ori	r25, 0x40	; 64
+  a6:	90 83       	st	Z, r25
+	
+	                                    // if AREF pin is connected directly to 5V, comment out the above line
+	ADMUX  |= channel_to_read;          // Select the ADC channel to convert
+  a8:	90 81       	ld	r25, Z
+  aa:	89 2b       	or	r24, r25
+  ac:	80 83       	st	Z, r24
+	
+	ADCSRA |= (1<<ADEN)  | (1<<ADSC);                // Enable ADC and Start the conversion
+  ae:	8c 91       	ld	r24, X
+  b0:	80 6c       	ori	r24, 0xC0	; 192
+  b2:	8c 93       	st	X, r24
+	
+	while( !(ADCSRA & (1<<ADIF)) );                  // Wait for conversion to finish
+  b4:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+  b8:	84 ff       	sbrs	r24, 4
+  ba:	fc cf       	rjmp	.-8      	; 0xb4 <read_adc_channel+0x34>
+	// When ADIF is Set,	[(ADCSRA & (1<<ADIF) = 1]
+	//	So NOT[(ADCSRA & (1<<ADIF) ] = 0, While(loop is false),Exits and goes to next instruction
+	
+	
+	
+	ADC_10bit_result   =  ADC;      // "ADC" variable (AVR-GCC defined variable) Contains the whole 10 bit ADC result,
+  bc:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
+  c0:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+  c4:	9a 83       	std	Y+2, r25	; 0x02
+  c6:	89 83       	std	Y+1, r24	; 0x01
+	                                // stored in the 16 bit ADC_10bit_Result Variable  (unsigned int)
+	
+	ADCSRA |= (1<<ADIF);            // Clear ADIF,ADIF is cleared by writing a 1 to ADSCRA (According to ATmega328p datasheet)
+  c8:	ea e7       	ldi	r30, 0x7A	; 122
+  ca:	f0 e0       	ldi	r31, 0x00	; 0
+  cc:	80 81       	ld	r24, Z
+  ce:	80 61       	ori	r24, 0x10	; 16
+  d0:	80 83       	st	Z, r24
+	
+	
+	
+	//ADCSRA &= ~(1<<ADEN);			
+    					
+	return ADC_10bit_result ;
+  d2:	89 81       	ldd	r24, Y+1	; 0x01
+  d4:	9a 81       	ldd	r25, Y+2	; 0x02
+}
+  d6:	0f 90       	pop	r0
+  d8:	0f 90       	pop	r0
+  da:	df 91       	pop	r29
+  dc:	cf 91       	pop	r28
+  de:	08 95       	ret
+
+000000e0 <transmit_adc_value>:
+
+//Transmits the 10bit value using USART in text format
+// sends \n after text 
+void transmit_adc_value(uint16_t adc_10bit_value)
+{
+  e0:	ef 92       	push	r14
+  e2:	ff 92       	push	r15
+  e4:	0f 93       	push	r16
+  e6:	1f 93       	push	r17
+  e8:	cf 93       	push	r28
+  ea:	df 93       	push	r29
+  ec:	8c 01       	movw	r16, r24
+	uint8_t   Hundreths_Position =0;
+	uint8_t   Thousands_Position =0;
+	
+	temp = adc_10bit_value;
+	
+	Ones_Position      = temp % 10; // Eg 1023 % 10  -> Remainder -> 3
+  ee:	9c 01       	movw	r18, r24
+  f0:	ad ec       	ldi	r26, 0xCD	; 205
+  f2:	bc ec       	ldi	r27, 0xCC	; 204
+  f4:	0e 94 4e 01 	call	0x29c	; 0x29c <__umulhisi3>
+  f8:	ac 01       	movw	r20, r24
+  fa:	56 95       	lsr	r21
+  fc:	47 95       	ror	r20
+  fe:	56 95       	lsr	r21
+ 100:	47 95       	ror	r20
+ 102:	56 95       	lsr	r21
+ 104:	47 95       	ror	r20
+ 106:	ca 01       	movw	r24, r20
+ 108:	88 0f       	add	r24, r24
+ 10a:	99 1f       	adc	r25, r25
+ 10c:	44 0f       	add	r20, r20
+ 10e:	55 1f       	adc	r21, r21
+ 110:	44 0f       	add	r20, r20
+ 112:	55 1f       	adc	r21, r21
+ 114:	44 0f       	add	r20, r20
+ 116:	55 1f       	adc	r21, r21
+ 118:	48 0f       	add	r20, r24
+ 11a:	59 1f       	adc	r21, r25
+ 11c:	c8 01       	movw	r24, r16
+ 11e:	84 1b       	sub	r24, r20
+ 120:	95 0b       	sbc	r25, r21
+ 122:	ac 01       	movw	r20, r24
+	temp = temp/10;                 // Eg temp = 1023/10 ->102
+ 124:	0e 94 4e 01 	call	0x29c	; 0x29c <__umulhisi3>
+ 128:	ec 01       	movw	r28, r24
+ 12a:	d6 95       	lsr	r29
+ 12c:	c7 95       	ror	r28
+ 12e:	d6 95       	lsr	r29
+ 130:	c7 95       	ror	r28
+ 132:	d6 95       	lsr	r29
+ 134:	c7 95       	ror	r28
+	Tens_Position      = temp % 10; // Eg 102  % 10  -> Remainder -> 2
+ 136:	9e 01       	movw	r18, r28
+ 138:	0e 94 4e 01 	call	0x29c	; 0x29c <__umulhisi3>
+ 13c:	fc 01       	movw	r30, r24
+ 13e:	f6 95       	lsr	r31
+ 140:	e7 95       	ror	r30
+ 142:	f6 95       	lsr	r31
+ 144:	e7 95       	ror	r30
+ 146:	f6 95       	lsr	r31
+ 148:	e7 95       	ror	r30
+ 14a:	cf 01       	movw	r24, r30
+ 14c:	88 0f       	add	r24, r24
+ 14e:	99 1f       	adc	r25, r25
+ 150:	ee 0f       	add	r30, r30
+ 152:	ff 1f       	adc	r31, r31
+ 154:	ee 0f       	add	r30, r30
+ 156:	ff 1f       	adc	r31, r31
+ 158:	ee 0f       	add	r30, r30
+ 15a:	ff 1f       	adc	r31, r31
+ 15c:	e8 0f       	add	r30, r24
+ 15e:	f9 1f       	adc	r31, r25
+ 160:	ce 01       	movw	r24, r28
+ 162:	8e 1b       	sub	r24, r30
+ 164:	9f 0b       	sbc	r25, r31
+ 166:	fc 01       	movw	r30, r24
+	temp = temp/10;                 // Eg temp = 102/10 ->10
+ 168:	98 01       	movw	r18, r16
+ 16a:	36 95       	lsr	r19
+ 16c:	27 95       	ror	r18
+ 16e:	36 95       	lsr	r19
+ 170:	27 95       	ror	r18
+ 172:	ab e7       	ldi	r26, 0x7B	; 123
+ 174:	b4 e1       	ldi	r27, 0x14	; 20
+ 176:	0e 94 4e 01 	call	0x29c	; 0x29c <__umulhisi3>
+ 17a:	7c 01       	movw	r14, r24
+ 17c:	f6 94       	lsr	r15
+ 17e:	e7 94       	ror	r14
+	Hundreths_Position = temp % 10;  // Eg 10   % 10  -> Remainder -> 0
+ 180:	97 01       	movw	r18, r14
+ 182:	ad ec       	ldi	r26, 0xCD	; 205
+ 184:	bc ec       	ldi	r27, 0xCC	; 204
+ 186:	0e 94 4e 01 	call	0x29c	; 0x29c <__umulhisi3>
+ 18a:	ec 01       	movw	r28, r24
+ 18c:	d6 95       	lsr	r29
+ 18e:	c7 95       	ror	r28
+ 190:	d6 95       	lsr	r29
+ 192:	c7 95       	ror	r28
+ 194:	d6 95       	lsr	r29
+ 196:	c7 95       	ror	r28
+ 198:	ce 01       	movw	r24, r28
+ 19a:	88 0f       	add	r24, r24
+ 19c:	99 1f       	adc	r25, r25
+ 19e:	cc 0f       	add	r28, r28
+ 1a0:	dd 1f       	adc	r29, r29
+ 1a2:	cc 0f       	add	r28, r28
+ 1a4:	dd 1f       	adc	r29, r29
+ 1a6:	cc 0f       	add	r28, r28
+ 1a8:	dd 1f       	adc	r29, r29
+ 1aa:	c8 0f       	add	r28, r24
+ 1ac:	d9 1f       	adc	r29, r25
+ 1ae:	c7 01       	movw	r24, r14
+ 1b0:	8c 1b       	sub	r24, r28
+ 1b2:	9d 0b       	sbc	r25, r29
+ 1b4:	ec 01       	movw	r28, r24
+	Thousands_Position = temp / 10;  // Eg 10   / 10  -> Quotient  -> 1
+ 1b6:	98 01       	movw	r18, r16
+ 1b8:	36 95       	lsr	r19
+ 1ba:	27 95       	ror	r18
+ 1bc:	36 95       	lsr	r19
+ 1be:	27 95       	ror	r18
+ 1c0:	36 95       	lsr	r19
+ 1c2:	27 95       	ror	r18
+ 1c4:	a5 ec       	ldi	r26, 0xC5	; 197
+ 1c6:	b0 e2       	ldi	r27, 0x20	; 32
+ 1c8:	0e 94 4e 01 	call	0x29c	; 0x29c <__umulhisi3>
+ 1cc:	92 95       	swap	r25
+ 1ce:	82 95       	swap	r24
+ 1d0:	8f 70       	andi	r24, 0x0F	; 15
+ 1d2:	89 27       	eor	r24, r25
+ 1d4:	9f 70       	andi	r25, 0x0F	; 15
+ 1d6:	89 27       	eor	r24, r25
+	
+	//ASCII Conversion
+	Ones_Position += 0x30;
+ 1d8:	d0 e3       	ldi	r29, 0x30	; 48
+ 1da:	d4 0f       	add	r29, r20
+	Tens_Position += 0x30;
+ 1dc:	10 e3       	ldi	r17, 0x30	; 48
+ 1de:	1e 0f       	add	r17, r30
+	Hundreths_Position += 0x30;
+ 1e0:	c0 5d       	subi	r28, 0xD0	; 208
+	Thousands_Position += 0x30;
+ 1e2:	80 5d       	subi	r24, 0xD0	; 208
+	
+	//Sending the 4 digit number to PC using USART
+	
+	trasmit_usart_data(Thousands_Position);
+ 1e4:	90 e0       	ldi	r25, 0x00	; 0
+ 1e6:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	trasmit_usart_data(Hundreths_Position);
+ 1ea:	8c 2f       	mov	r24, r28
+ 1ec:	90 e0       	ldi	r25, 0x00	; 0
+ 1ee:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	trasmit_usart_data(Tens_Position);
+ 1f2:	81 2f       	mov	r24, r17
+ 1f4:	90 e0       	ldi	r25, 0x00	; 0
+ 1f6:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	trasmit_usart_data(Ones_Position);
+ 1fa:	8d 2f       	mov	r24, r29
+ 1fc:	90 e0       	ldi	r25, 0x00	; 0
+ 1fe:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	
+	
+}
+ 202:	df 91       	pop	r29
+ 204:	cf 91       	pop	r28
+ 206:	1f 91       	pop	r17
+ 208:	0f 91       	pop	r16
+ 20a:	ff 90       	pop	r15
+ 20c:	ef 90       	pop	r14
+ 20e:	08 95       	ret
+
+00000210 <main>:
+
+
+
+int main(void)
+{
+	 configure_serial_usart(BAUD_RATE_9600_BPS);
+ 210:	87 e4       	ldi	r24, 0x47	; 71
+ 212:	90 e0       	ldi	r25, 0x00	; 0
+ 214:	0e 94 36 01 	call	0x26c	; 0x26c <configure_serial_usart>
+	 
+	 
+	 while(1)
+	 {
+	
+	   transmit_adc_value(read_adc_channel(ADC_CHANNEL_0));
+ 218:	80 e0       	ldi	r24, 0x00	; 0
+ 21a:	0e 94 40 00 	call	0x80	; 0x80 <read_adc_channel>
+ 21e:	0e 94 70 00 	call	0xe0	; 0xe0 <transmit_adc_value>
+	   trasmit_usart_data('-');
+ 222:	8d e2       	ldi	r24, 0x2D	; 45
+ 224:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	   // _delay_ms(100);
+		
+	   transmit_adc_value(read_adc_channel(ADC_CHANNEL_1));
+ 228:	81 e0       	ldi	r24, 0x01	; 1
+ 22a:	0e 94 40 00 	call	0x80	; 0x80 <read_adc_channel>
+ 22e:	0e 94 70 00 	call	0xe0	; 0xe0 <transmit_adc_value>
+	   trasmit_usart_data('-');
+ 232:	8d e2       	ldi	r24, 0x2D	; 45
+ 234:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	   // _delay_ms(100);
+		
+	   transmit_adc_value(read_adc_channel(ADC_CHANNEL_2));
+ 238:	82 e0       	ldi	r24, 0x02	; 2
+ 23a:	0e 94 40 00 	call	0x80	; 0x80 <read_adc_channel>
+ 23e:	0e 94 70 00 	call	0xe0	; 0xe0 <transmit_adc_value>
+	   trasmit_usart_data('-');
+ 242:	8d e2       	ldi	r24, 0x2D	; 45
+ 244:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	   // _delay_ms(100);
+	   transmit_adc_value(read_adc_channel(ADC_CHANNEL_3));
+ 248:	83 e0       	ldi	r24, 0x03	; 3
+ 24a:	0e 94 40 00 	call	0x80	; 0x80 <read_adc_channel>
+ 24e:	0e 94 70 00 	call	0xe0	; 0xe0 <transmit_adc_value>
+	   trasmit_usart_data('\n');
+ 252:	8a e0       	ldi	r24, 0x0A	; 10
+ 254:	0e 94 3e 01 	call	0x27c	; 0x27c <trasmit_usart_data>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 258:	2f ef       	ldi	r18, 0xFF	; 255
+ 25a:	8f eb       	ldi	r24, 0xBF	; 191
+ 25c:	91 e2       	ldi	r25, 0x21	; 33
+ 25e:	21 50       	subi	r18, 0x01	; 1
+ 260:	80 40       	sbci	r24, 0x00	; 0
+ 262:	90 40       	sbci	r25, 0x00	; 0
+ 264:	e1 f7       	brne	.-8      	; 0x25e <main+0x4e>
+ 266:	00 c0       	rjmp	.+0      	; 0x268 <main+0x58>
+ 268:	00 00       	nop
+ 26a:	d6 cf       	rjmp	.-84     	; 0x218 <main+0x8>
+
+0000026c <configure_serial_usart>:
+	
+	
+	/******************  USART Configuration code ************************/
+	
+	/* Set Baudrate  */
+	UBRR0H = (ubrr>>8);
+ 26c:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
+	UBRR0L = (ubrr);
+ 270:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+	
+	/* Set frame format: 8data, 1stop bit */
+	UCSR0C = 0x06;
+ 274:	86 e0       	ldi	r24, 0x06	; 6
+ 276:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7f80c2>
+ 27a:	08 95       	ret
+
+0000027c <trasmit_usart_data>:
+
+
+
+void trasmit_usart_data(uint8_t transmit_byte)
+{	
+	UCSR0B |= (1<<TXEN0);            // Enable transmitter
+ 27c:	e1 ec       	ldi	r30, 0xC1	; 193
+ 27e:	f0 e0       	ldi	r31, 0x00	; 0
+ 280:	90 81       	ld	r25, Z
+ 282:	98 60       	ori	r25, 0x08	; 8
+ 284:	90 83       	st	Z, r25
+	while (!( UCSR0A & (1<<UDRE0))); // Wait for empty transmit buffer       
+ 286:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+ 28a:	95 ff       	sbrs	r25, 5
+ 28c:	fc cf       	rjmp	.-8      	; 0x286 <trasmit_usart_data+0xa>
+	UDR0 = transmit_byte;		     // Put data into buffer, sends the data 
+ 28e:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+	while (!( UCSR0A & (1<<UDRE0))); // Wait for empty transmit buffer 
+ 292:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+ 296:	85 ff       	sbrs	r24, 5
+ 298:	fc cf       	rjmp	.-8      	; 0x292 <trasmit_usart_data+0x16>
+}
+ 29a:	08 95       	ret
+
+0000029c <__umulhisi3>:
+ 29c:	a2 9f       	mul	r26, r18
+ 29e:	b0 01       	movw	r22, r0
+ 2a0:	b3 9f       	mul	r27, r19
+ 2a2:	c0 01       	movw	r24, r0
+ 2a4:	a3 9f       	mul	r26, r19
+ 2a6:	70 0d       	add	r23, r0
+ 2a8:	81 1d       	adc	r24, r1
+ 2aa:	11 24       	eor	r1, r1
+ 2ac:	91 1d       	adc	r25, r1
+ 2ae:	b2 9f       	mul	r27, r18
+ 2b0:	70 0d       	add	r23, r0
+ 2b2:	81 1d       	adc	r24, r1
+ 2b4:	11 24       	eor	r1, r1
+ 2b6:	91 1d       	adc	r25, r1
+ 2b8:	08 95       	ret
+
+000002ba <_exit>:
+ 2ba:	f8 94       	cli
+
+000002bc <__stop_program>:
+ 2bc:	ff cf       	rjmp	.-2      	; 0x2bc <__stop_program>
